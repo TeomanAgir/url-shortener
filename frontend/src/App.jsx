@@ -10,7 +10,6 @@ export default function App() {
   const [copiedCode, setCopiedCode] = useState(null);
 
 
-
   async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
