@@ -70,6 +70,7 @@ export default function App() {
             </div>
             {error && <p className="error-msg">⚠ {error}</p>}
           </form>
+        </section>
       </main>
     </div>
   );
