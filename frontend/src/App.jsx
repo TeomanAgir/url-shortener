@@ -9,19 +9,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [copiedCode, setCopiedCode] = useState(null);
 
-  // Sayfa açılınca mevcut linkleri çek
-  useEffect(() => {
-    loadLinks();
-  }, []);
 
-  async function loadLinks() {
-    try {
-      const data = await fetchLinks();
-      setLinks(data);
-    } catch (err) {
-      setError(err.message);
-    }
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -83,55 +71,6 @@ export default function App() {
             </div>
             {error && <p className="error-msg">⚠ {error}</p>}
           </form>
-        </section>
-
-        <section className="links-section">
-          {links.length === 0 ? (
-            <div className="empty-state">
-              <span>Henüz link yok.</span>
-            </div>
-          ) : (
-            <ul className="links-list">
-              {links.map((link) => (
-                <li key={link.id} className="link-card">
-                  <div className="link-card-top">
-                    <a
-                      href={link.short_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="short-url"
-                    >
-                      {link.short_url}
-                    </a>
-                    <div className="link-actions">
-                      <button
-                        className="action-btn copy-btn"
-                        onClick={() => handleCopy(link.short_url, link.short_code)}
-                      >
-                        {copiedCode === link.short_code ? '✓ Kopyalandı' : 'Kopyala'}
-                      </button>
-                      <button
-                        className="action-btn delete-btn"
-                        onClick={() => handleDelete(link.short_code)}
-                      >
-                        Sil
-                      </button>
-                    </div>
-                  </div>
-                  <div className="link-card-bottom">
-                    <span className="original-url" title={link.original_url}>
-                      {link.original_url}
-                    </span>
-                    <span className="meta">
-                      {link.click_count} tıklanma &middot;{' '}
-                      {new Date(link.created_at).toLocaleDateString('tr-TR')}
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
       </main>
     </div>
   );
