@@ -1,4 +1,4 @@
-# kısalink — URL Kısaltıcı
+# lnkteo.xyz — URL Kısaltıcı
 
 Express + React + PostgreSQL (Supabase) ile yazılmış tam stack link kısaltıcı.
 
