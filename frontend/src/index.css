@@ -304,4 +304,22 @@ h1 {
   .original-url {
     max-width: 200px;
   }
+
+  .last-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  flex-wrap: wrap;
+}
+
+.last-link-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
 }

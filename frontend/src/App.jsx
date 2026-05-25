@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import { createLink, fetchLinks, deleteLink } from './api/links';
+
+import { useState } from 'react';
+import { createLink } from './api/links';
 import './index.css';
 
 export default function App() {
   const [url, setUrl] = useState('');
-  const [links, setLinks] = useState([]);
+  const [lastLink, setLastLink] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [copiedCode, setCopiedCode] = useState(null);
-
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -17,22 +17,12 @@ export default function App() {
 
     try {
       const newLink = await createLink(url);
-      // Yeni linki listenin başına ekle, tekrar fetch etmeye gerek yok
-      setLinks((prev) => [newLink, ...prev]);
+      setLastLink(newLink);
       setUrl('');
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
-    }
-  }
-
-  async function handleDelete(code) {
-    try {
-      await deleteLink(code);
-      setLinks((prev) => prev.filter((l) => l.short_code !== code));
-    } catch (err) {
-      setError(err.message);
     }
   }
 
@@ -70,6 +60,26 @@ export default function App() {
             </div>
             {error && <p className="error-msg">⚠ {error}</p>}
           </form>
+
+          {lastLink && (
+            <div className="last-link">
+              <span className="last-link-label">Kısaltıldı →</span>
+              <a
+                href={lastLink.short_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="short-url"
+              >
+                {lastLink.short_url}
+              </a>
+              <button
+                className="action-btn copy-btn"
+                onClick={() => handleCopy(lastLink.short_url, lastLink.short_code)}
+              >
+                {copiedCode === lastLink.short_code ? '✓ Kopyalandı' : 'Kopyala'}
+              </button>
+            </div>
+          )}
         </section>
       </main>
     </div>
