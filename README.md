@@ -1,6 +1,7 @@
 # lnkteo.xyz — URL Kısaltıcı
 
 Express + React + PostgreSQL (Supabase) ile yazılmış tam stack link kısaltıcı.
+Projenin tek amacı vercel, Railway ve Supabase sistemlerini denemektir.
 
 ## Proje Yapısı
 
